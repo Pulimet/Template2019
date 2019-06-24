@@ -1,4 +1,4 @@
-package net.alexandroid.template2019.ui
+package net.alexandroid.template2019.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
