@@ -7,7 +7,7 @@ import org.koin.core.logger.Logger
 import org.koin.core.logger.MESSAGE
 
 @Suppress("ConstantConditionIf")
-class KoinLogs : Logger() {
+class KoinLogs : Logger(level = Level.DEBUG) {
 
     override fun log(level: Level, msg: MESSAGE) {
         when (level) {
