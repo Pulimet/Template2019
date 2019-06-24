@@ -9,7 +9,9 @@ import net.alexandroid.template2019.di.KoinLogs
 import net.alexandroid.template2019.di.appModule
 import net.alexandroid.utils.mylog.MyLog
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import kotlin.coroutines.CoroutineContext
 
 class App : Application(), CoroutineScope {
@@ -27,7 +29,7 @@ class App : Application(), CoroutineScope {
 
     private fun initKoin() {
         startKoin {
-            KoinLogs()
+            logger(KoinLogs())
             androidContext(applicationContext)
             modules(listOf(appModule))
         }
