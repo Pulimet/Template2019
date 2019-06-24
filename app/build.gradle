@@ -25,6 +25,7 @@ android {
 dependencies {
     def nav_version = "2.0.0"
     def coroutines_version = "1.2.1"
+    def koin_version = "2.0.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -39,6 +40,13 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    // Koin Android Scope feature
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    // Koin Android ViewModel feature
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     // AlexAndroid libs
     implementation "net.alexandroid.utils:mylog:1.2"
