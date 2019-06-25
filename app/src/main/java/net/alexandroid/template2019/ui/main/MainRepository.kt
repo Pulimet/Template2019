@@ -1,5 +1,8 @@
 package net.alexandroid.template2019.ui.main
 
-interface MainRepository {
+import kotlinx.coroutines.Deferred
+import net.alexandroid.template2019.model.Tmdb
 
+interface MainRepository {
+    fun discoverMoviesAsync(): Deferred<Tmdb.Discover>
 }
