@@ -1,6 +1,9 @@
 package net.alexandroid.template2019.di
 
 import com.google.gson.Gson
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import net.alexandroid.template2019.TBDB_BASE_URL
+import net.alexandroid.template2019.network.TmdbApiService
 import net.alexandroid.template2019.ui.main.MainRepository
 import net.alexandroid.template2019.ui.main.MainRepositoryImpl
 import net.alexandroid.template2019.ui.main.MainViewModel
@@ -8,13 +11,15 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 var appModule = module {
     single { Gson() }
     single { createOkHttpClient() }
-
-    single<MainRepository> { MainRepositoryImpl() }
+    single { createWebService<TmdbApiService>(get(), TBDB_BASE_URL) }
+    single<MainRepository> { MainRepositoryImpl(get()) }
     viewModel { MainViewModel(get()) }
 }
 
@@ -28,3 +33,12 @@ fun createOkHttpClient(): OkHttpClient {
         .build()
 }
 
+inline fun <reified T> createWebService(okHttpClient: OkHttpClient, url: String): T {
+    val retrofit = Retrofit.Builder()
+        .baseUrl(url)
+        .client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .build()
+    return retrofit.create(T::class.java)
+}
