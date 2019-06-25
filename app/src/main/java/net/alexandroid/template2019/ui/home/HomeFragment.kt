@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : BaseFragment() {
     private val mainViewModel: MainViewModel by sharedViewModel()
-    private var homeAdapter : HomeAdapter? = null
+    private var homeAdapter: HomeAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -26,10 +26,12 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerView()
-
+        swipeRefreshLayout.isRefreshing = true
+        swipeRefreshLayout.setOnRefreshListener { mainViewModel.onUserRefreshed() }
         mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> {
             MyLog.d(it.results[1].title)
             homeAdapter?.setItems(it)
+            swipeRefreshLayout.isRefreshing = false
         })
     }
 

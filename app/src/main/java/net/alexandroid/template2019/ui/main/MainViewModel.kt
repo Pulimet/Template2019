@@ -14,11 +14,19 @@ class MainViewModel(private val repo: MainRepository) : BaseViewModel() {
     fun getDiscoveredMovies(): LiveData<Tmdb.Discover> {
         if (!::discoverMovies.isInitialized) {
             discoverMovies = MutableLiveData()
-            launch {
-                val result = retryIO(desc = "Discover Movies") { repo.discoverMoviesAsync().await() }
-                if (result != null) discoverMovies.postValue(result)
-            }
+            fetDiscoveredMovies()
         }
         return discoverMovies
+    }
+
+    private fun fetDiscoveredMovies() {
+        launch {
+            val result = retryIO(desc = "Discover Movies") { repo.discoverMoviesAsync().await() }
+            if (result != null) discoverMovies.postValue(result)
+        }
+    }
+
+    fun onUserRefreshed() {
+        fetDiscoveredMovies()
     }
 }
