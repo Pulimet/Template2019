@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment() {
             swipeRefreshLayout.isRefreshing = false
         })
 
-        homeViewModel.getOpenMovie().observe(this, Observer<Tmdb.Movie> {
+        homeViewModel.getOpenMovie().observe(viewLifecycleOwner, Observer<Tmdb.Movie> {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToMovieFragment(it)
             )
