@@ -6,15 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import net.alexandroid.template2019.R
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseHolder
-import net.alexandroid.template2019.ui.main.MainViewModel
 
-class HomeAdapter(private val mainViewModel: MainViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(private val homeViewModel: HomeViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var data = listOf<Tmdb.Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
-        return MovieHolder(v, mainViewModel)
+        return MovieHolder(v, homeViewModel)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

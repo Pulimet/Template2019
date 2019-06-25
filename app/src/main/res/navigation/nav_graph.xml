@@ -9,5 +9,16 @@
               android:name="net.alexandroid.template2019.ui.home.HomeFragment"
               android:label="fragment_home"
               tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="net.alexandroid.template2019.ui.movie.MovieFragment"
+        android:label="MovieFragment" >
+        <argument
+            android:name="movie"
+            app:argType="net.alexandroid.template2019.model.Tmdb$Movie" />
     </fragment>
 </navigation>

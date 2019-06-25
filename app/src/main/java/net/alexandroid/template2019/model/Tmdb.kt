@@ -1,6 +1,8 @@
 package net.alexandroid.template2019.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 object Tmdb {
     data class Discover(
@@ -10,6 +12,7 @@ object Tmdb {
         val results: List<Movie>
     )
 
+    @Parcelize
     data class Movie(
         val id: Int,
         val title: String,
@@ -18,5 +21,5 @@ object Tmdb {
         val overview: String,
         @SerializedName("release_date") val date: String, //2019-06-19
         @SerializedName("vote_average") val vote: Double
-    )
+    ) : Parcelable
 }

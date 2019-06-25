@@ -8,21 +8,21 @@ import net.alexandroid.template2019.TMDB_IMG_URL
 import net.alexandroid.template2019.loadImage
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseHolder
-import net.alexandroid.template2019.ui.main.MainViewModel
 
-class MovieHolder(v: View, mainViewModel: MainViewModel) : BaseHolder(v) {
+class MovieHolder(v: View, private val mainViewModel: HomeViewModel) : BaseHolder(v) {
 
     init {
         itemView.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        if (adapterPosition != RecyclerView.NO_POSITION) {
-            // TODO viewModel.onDemoClick()
+        if (adapterPosition != RecyclerView.NO_POSITION && v != null) {
+            mainViewModel.onMovieSelected(v.tag as Tmdb.Movie)
         }
     }
 
     fun onBindViewHolder(data: Tmdb.Movie) {
+        itemView.tag = data
         imgMovie.loadImage(getImageUrl(data), holder = R.drawable.ic_no_video)
     }
 

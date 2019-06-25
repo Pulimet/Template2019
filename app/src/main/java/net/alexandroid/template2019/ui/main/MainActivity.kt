@@ -1,6 +1,8 @@
 package net.alexandroid.template2019.ui.main
 
 import android.os.Bundle
+import android.view.View
+import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -9,13 +11,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import net.alexandroid.template2019.R
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.utils.mylog.MyLog
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import android.view.ViewGroup
-import android.view.View
-import android.view.animation.DecelerateInterpolator
-import net.alexandroid.template2019.R
 
 
 class MainActivity : AppCompatActivity() {
