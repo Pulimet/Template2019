@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="movie_title_text">20sp</dimen>
+    <dimen name="movie_title_padding">8dp</dimen>
+    <dimen name="movie_description_text">16sp</dimen>
+    <dimen name="movie_description_padding">8dp</dimen>
+</resources>
