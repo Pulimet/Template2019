@@ -21,6 +21,8 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> {
             MyLog.d(it.results[1].title)
         })
