@@ -5,9 +5,6 @@ import net.alexandroid.utils.mylog.MyLog
 import retrofit2.HttpException
 import java.io.IOException
 
-/**
- * Created on 1/9/2019 by Alexey Korolev.
- */
 suspend fun <T> retryIO(
     times: Int = 4,
     initialDelay: Long = 1000, // 1 second
