@@ -7,9 +7,21 @@ import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.network.retryIO
 import net.alexandroid.template2019.ui.base.BaseViewModel
 
+const val EVENT_START_ANIMATION = 0
+
 class MainViewModel(private val repo: MainRepository) : BaseViewModel() {
 
+    private lateinit var viewListener: MutableLiveData<Int>
     private lateinit var discoverMovies: MutableLiveData<Tmdb.Discover>
+
+    private var isAnimated = false
+
+    fun getViewEvents(): LiveData<Int> {
+        if (!::viewListener.isInitialized) {
+            viewListener = MutableLiveData()
+        }
+        return viewListener
+    }
 
     fun getDiscoveredMovies(): LiveData<Tmdb.Discover> {
         if (!::discoverMovies.isInitialized) {
@@ -26,7 +38,14 @@ class MainViewModel(private val repo: MainRepository) : BaseViewModel() {
         }
     }
 
-    fun onUserRefreshed() {
+    fun onUserRefreshedMain() {
         fetDiscoveredMovies()
+    }
+
+    fun onWindowFocusChanged(hasFocus: Boolean) {
+        if (hasFocus && !isAnimated) {
+            viewListener.postValue(EVENT_START_ANIMATION)
+            isAnimated = true
+        }
     }
 }

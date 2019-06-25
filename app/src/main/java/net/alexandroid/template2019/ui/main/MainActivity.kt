@@ -5,13 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import net.alexandroid.template2019.R
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.utils.mylog.MyLog
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import android.view.ViewGroup
+import android.view.View
+import android.view.animation.DecelerateInterpolator
+import net.alexandroid.template2019.R
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,8 +35,38 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment)
 
         mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> {
-            MyLog.d(it.results[0].title)
+            MyLog.d("Discover movies loaded")
         })
+
+        mainViewModel.getViewEvents().observe(this, Observer {
+            when (it) {
+                EVENT_START_ANIMATION -> startAnimation()
+            }
+        })
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        mainViewModel.onWindowFocusChanged(hasFocus)
+    }
+
+    private fun startAnimation() {
+        val windowRoot = findViewById<View>(android.R.id.content)
+        mainAppLayout.apply {
+            alpha = 0f
+            scaleX = 0f
+            scaleY = 0f
+            translationY = windowRoot.height.toFloat()
+            animate()
+                .translationY(0f)
+                .alpha(1f)
+                .scaleX(1f)
+                .scaleY(1f)
+                .setDuration(1500)
+                .setInterpolator(DecelerateInterpolator())
+                .setStartDelay(300)
+                .start()
+        }
     }
 
     override fun onDestroy() {

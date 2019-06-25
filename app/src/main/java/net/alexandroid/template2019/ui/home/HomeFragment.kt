@@ -27,9 +27,9 @@ class HomeFragment : BaseFragment() {
 
         setRecyclerView()
         swipeRefreshLayout.isRefreshing = true
-        swipeRefreshLayout.setOnRefreshListener { mainViewModel.onUserRefreshed() }
+        swipeRefreshLayout.setOnRefreshListener { mainViewModel.onUserRefreshedMain() }
         mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> {
-            MyLog.d(it.results[1].title)
+            MyLog.d("Discover movies loaded")
             homeAdapter?.setItems(it)
             swipeRefreshLayout.isRefreshing = false
         })
