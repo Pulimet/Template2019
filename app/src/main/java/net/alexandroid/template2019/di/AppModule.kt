@@ -2,7 +2,7 @@ package net.alexandroid.template2019.di
 
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import net.alexandroid.template2019.TBDB_BASE_URL
+import net.alexandroid.template2019.TMDB_BASE_URL
 import net.alexandroid.template2019.network.TmdbApiService
 import net.alexandroid.template2019.ui.main.MainRepository
 import net.alexandroid.template2019.ui.main.MainRepositoryImpl
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 var appModule = module {
     single { Gson() }
     single { createOkHttpClient() }
-    single { createWebService<TmdbApiService>(get(), TBDB_BASE_URL) }
+    single { createWebService<TmdbApiService>(get(), TMDB_BASE_URL) }
     single<MainRepository> { MainRepositoryImpl(get()) }
     viewModel { MainViewModel(get()) }
 }
