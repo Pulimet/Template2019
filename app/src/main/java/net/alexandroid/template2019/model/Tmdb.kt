@@ -12,6 +12,7 @@ object Tmdb {
 
     data class Movie(
         val id: Int,
+        val title: String,
         @SerializedName("poster_path") val posterImg: String,
         @SerializedName("backdrop_path") val backImg: String,
         val overview: String,
