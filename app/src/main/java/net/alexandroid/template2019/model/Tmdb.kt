@@ -12,7 +12,7 @@ object Tmdb {
         val page: Int,
         @SerializedName("total_results") val totalResults: Int,
         @SerializedName("total_pages") val totalPages: Int,
-        val results: List<Movie>
+        val results: MutableList<Movie>
     )
 
     @Parcelize
@@ -32,7 +32,7 @@ object Tmdb {
                 else -> null
             }
 
-        fun getYear(): String {
+        private fun getYear(): String {
             val parsedDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date)
             val formatOut = SimpleDateFormat("yyyy", Locale.US)
             return if (parsedDate != null) {

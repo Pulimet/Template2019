@@ -34,7 +34,18 @@ class MainViewModel(private val repo: MainRepository) : BaseViewModel() {
     private fun fetchDiscoveredMovies() {
         launch {
             val result = retryIO(desc = "Discover Movies") { repo.discoverMoviesAsync().await() }
-            if (result != null) discoverMovies.postValue(result)
+            if (result != null) {
+                removeMoviesWithoutImages(result)
+                discoverMovies.postValue(result)
+            }
+        }
+    }
+
+    private fun removeMoviesWithoutImages(result: Tmdb.Discover) {
+        val iterator = result.results.iterator()
+        while (iterator.hasNext()) {
+            val movie = iterator.next()
+            if (movie.getImageUrl() === null) iterator.remove()
         }
     }
 
