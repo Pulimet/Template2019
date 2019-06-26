@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import net.alexandroid.template2019.R
@@ -46,7 +47,7 @@ class HomeFragment : BaseFragment() {
 
     private fun setRecyclerView() {
         homeRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context,2)
             homeAdapter = HomeAdapter(homeViewModel)
             adapter = homeAdapter
         }

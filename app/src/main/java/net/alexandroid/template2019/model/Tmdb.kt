@@ -30,7 +30,6 @@ object Tmdb {
                 posterImg != null -> TMDB_IMG_URL + posterImg
                 backImg != null -> TMDB_IMG_URL + backImg
                 else -> null
-
             }
 
         fun getYear(): String {
