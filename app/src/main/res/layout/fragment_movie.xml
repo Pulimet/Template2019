@@ -8,11 +8,12 @@
     <ImageView
         android:id="@+id/imgMovie"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/desc_movie_image"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/tvDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,17 +41,18 @@
         android:padding="@dimen/movie_description_padding"
         android:textColor="@android:color/black"
         android:textSize="@dimen/movie_description_text"
+        app:layout_constraintBottom_toTopOf="@id/tvRating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
         tools:text="Movie description is here and it can be much longer. Very long string with a lot of details about the movie" />
 
     <TextView
         android:id="@+id/tvRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDescription"
-        tools:text="Rating: 7.8"/>
+        tools:text="Rating: 7.8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

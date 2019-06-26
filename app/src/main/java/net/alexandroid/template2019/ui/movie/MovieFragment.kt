@@ -27,6 +27,7 @@ class MovieFragment : BaseFragment() {
         tvTitle.text = movie.getTitleWithYear()
         tvDescription.text = movie.overview
         tvRating.text = String.format("Rating: %s", movie.vote.toString())
-
     }
+
+
 }
