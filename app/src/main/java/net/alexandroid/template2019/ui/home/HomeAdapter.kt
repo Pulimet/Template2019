@@ -32,7 +32,7 @@ class HomeAdapter(private val homeViewModel: HomeViewModel) : RecyclerView.Adapt
     }
 
     private fun addScaleAnimation(holder: RecyclerView.ViewHolder) {
-        if (homeViewModel.isAnimated || System.currentTimeMillis() > launchTime + 1000) return
+        if (homeViewModel.isAnimated || System.currentTimeMillis() > launchTime + 1500) return
 
         val anim = ScaleAnimation(
             0.0f, 1.0f, 0.0f, 1.0f,

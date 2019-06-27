@@ -28,7 +28,6 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setRecyclerView()
         swipeRefreshLayout.isRefreshing = true
         swipeRefreshLayout.setOnRefreshListener { mainViewModel.onUserRefreshedMain() }
@@ -41,13 +40,6 @@ class HomeFragment : BaseFragment() {
             layoutManager = GridLayoutManager(context, 2)
             homeAdapter = HomeAdapter(homeViewModel)
             adapter = homeAdapter
-
-            // Solve return shared element transition
-          postponeEnterTransition()
-            viewTreeObserver.addOnPreDrawListener {
-                startPostponedEnterTransition()
-                true
-            }
         }
     }
 
