@@ -14,33 +14,33 @@ class HomeAdapter(private val homeViewModel: HomeViewModel) : RecyclerView.Adapt
 
     private var data = listOf<Tmdb.Movie>()
     private var offset = 200L
+
     private var launchTime = 0L
-    private val lastPosition = -1
 
     init {
         launchTime = System.currentTimeMillis()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val v =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return MovieHolder(v, homeViewModel)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as MovieHolder).onBindViewHolder(data[position])
-        addScaleAnimation(holder, position)
+        addScaleAnimation(holder)
     }
 
-    private fun addScaleAnimation(holder: RecyclerView.ViewHolder, position: Int) {
-        if (position < lastPosition) return
+    private fun addScaleAnimation(holder: RecyclerView.ViewHolder) {
+        if (System.currentTimeMillis() > launchTime + 1000 ) return
+
         val anim = ScaleAnimation(
             0.0f, 1.0f, 0.0f, 1.0f,
             RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f
         )
         anim.duration = 800L
         anim.startOffset = offset
-        offset = if (launchTime + 1000 > System.currentTimeMillis()) offset + 100 else 0
+        offset += 100
         holder.itemView.startAnimation(anim)
     }
 

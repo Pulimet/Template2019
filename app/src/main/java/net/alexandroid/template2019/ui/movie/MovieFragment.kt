@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.transition.TransitionInflater
 import kotlinx.android.synthetic.main.fragment_movie.*
 import net.alexandroid.template2019.R
 import net.alexandroid.template2019.loadImage
@@ -14,20 +15,24 @@ import net.alexandroid.utils.mylog.MyLog
 class MovieFragment : BaseFragment() {
     private lateinit var movie: Tmdb.Movie
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movie, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         arguments?.let { movie = MovieFragmentArgs.fromBundle(it).movie }
         MyLog.d("Movie title is: ${movie.title}")
 
-        imgMovie.loadImage(movie.getImageUrl(), holder = R.drawable.ic_no_video)
+        imgMoviePoster.loadImage(movie.getImageUrl(), holder = R.drawable.ic_no_video)
         tvTitle.text = movie.getTitleWithYear()
         tvDescription.text = movie.overview
         tvRating.text = String.format("Rating: %s", movie.vote.toString())
     }
-
-
 }

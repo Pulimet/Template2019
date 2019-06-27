@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -31,17 +32,8 @@ class HomeFragment : BaseFragment() {
         setRecyclerView()
         swipeRefreshLayout.isRefreshing = true
         swipeRefreshLayout.setOnRefreshListener { mainViewModel.onUserRefreshedMain() }
-        mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> {
-            MyLog.d("Discover movies loaded")
-            homeAdapter?.setItems(it)
-            swipeRefreshLayout.isRefreshing = false
-        })
-
-        homeViewModel.getOpenMovie().observe(viewLifecycleOwner, Observer<Tmdb.Movie> {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToMovieFragment(it)
-            )
-        })
+        mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> { updateItems(it) })
+        homeViewModel.getOpenMovie().observe(viewLifecycleOwner, Observer<Tmdb.Movie> { openMovie(it) })
     }
 
     private fun setRecyclerView() {
@@ -49,6 +41,28 @@ class HomeFragment : BaseFragment() {
             layoutManager = GridLayoutManager(context, 2)
             homeAdapter = HomeAdapter(homeViewModel)
             adapter = homeAdapter
+
+            // Solve return shared element transition
+            postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
         }
+    }
+
+    private fun updateItems(it: Tmdb.Discover) {
+        MyLog.d("Discover movies loaded")
+        homeAdapter?.setItems(it)
+        swipeRefreshLayout.isRefreshing = false
+    }
+
+    private fun openMovie(movie: Tmdb.Movie) {
+        val holder = homeRecyclerView.findViewHolderForLayoutPosition(movie.position)
+        val view = holder?.itemView?.findViewById<View>(R.id.imgMovie) ?: return
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToMovieFragment(movie),
+            FragmentNavigatorExtras(view to "imageViewAnim")
+        )
     }
 }

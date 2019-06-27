@@ -17,6 +17,7 @@ object Tmdb {
 
     @Parcelize
     data class Movie(
+        var position: Int = -1,
         val id: Int,
         val title: String,
         @SerializedName("poster_path") val posterImg: String?,
