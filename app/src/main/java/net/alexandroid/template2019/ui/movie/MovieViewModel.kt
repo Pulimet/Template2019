@@ -1,12 +1,14 @@
 package net.alexandroid.template2019.ui.movie
 
-import net.alexandroid.template2019.model.Tmdb
+import kotlinx.coroutines.launch
+import net.alexandroid.template2019.model.Movie
+import net.alexandroid.template2019.repos.MovieRepository
 import net.alexandroid.template2019.ui.base.BaseViewModel
 
-class MovieViewModel : BaseViewModel() {
+class MovieViewModel(private val movieRepository: MovieRepository) : BaseViewModel() {
 
-    fun onStarClick(movie: Tmdb.Movie) {
-        // TODO add movie to favorites
+    fun onStarClick(movie: Movie) {
+        launch { movieRepository.insert(movie) }
     }
 
 }

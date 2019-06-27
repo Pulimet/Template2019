@@ -6,14 +6,15 @@ import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.ScaleAnimation
 import androidx.recyclerview.widget.RecyclerView
 import net.alexandroid.template2019.R
+import net.alexandroid.template2019.model.Movie
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseHolder
 
 
 class HomeAdapter(private val homeViewModel: HomeViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var data = listOf<Tmdb.Movie>()
-    private var offset = 300L
+    private var data = listOf<Movie>()
+    private var offset = 0L
 
     private var launchTime = 0L
 
@@ -38,7 +39,7 @@ class HomeAdapter(private val homeViewModel: HomeViewModel) : RecyclerView.Adapt
             0.0f, 1.0f, 0.0f, 1.0f,
             RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f
         )
-        anim.duration = 1000L
+        anim.duration = 700L
         anim.startOffset = offset
         offset += 150
         holder.itemView.startAnimation(anim)
@@ -46,8 +47,8 @@ class HomeAdapter(private val homeViewModel: HomeViewModel) : RecyclerView.Adapt
 
     override fun getItemCount() = data.size
 
-    fun setItems(items: Tmdb.Discover) {
-        data = items.results
+    fun setItems(items: List<Movie>) {
+        data = items
         notifyDataSetChanged()
     }
 

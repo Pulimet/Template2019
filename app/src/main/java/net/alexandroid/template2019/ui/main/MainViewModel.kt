@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.network.retryIO
+import net.alexandroid.template2019.repos.MainRepository
 import net.alexandroid.template2019.ui.base.BaseViewModel
 
 const val EVENT_START_ANIMATION = 0

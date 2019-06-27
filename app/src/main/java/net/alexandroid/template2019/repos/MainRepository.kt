@@ -1,4 +1,4 @@
-package net.alexandroid.template2019.ui.main
+package net.alexandroid.template2019.repos
 
 import kotlinx.coroutines.Deferred
 import net.alexandroid.template2019.model.Tmdb

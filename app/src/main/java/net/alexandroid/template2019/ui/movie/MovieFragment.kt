@@ -5,19 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import kotlinx.android.synthetic.main.fragment_movie.*
 import net.alexandroid.template2019.R
 import net.alexandroid.template2019.loadImage
-import net.alexandroid.template2019.model.Tmdb
+import net.alexandroid.template2019.model.Movie
 import net.alexandroid.template2019.ui.base.BaseFragment
 import net.alexandroid.utils.mylog.MyLog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieFragment : BaseFragment() {
-    private lateinit var movie: Tmdb.Movie
+    private lateinit var movie: Movie
     private var isGoBackCalled = false
     private val movieViewModel: MovieViewModel by viewModel()
 
@@ -42,7 +43,10 @@ class MovieFragment : BaseFragment() {
         tvDescription.text = movie.overview
         tvRating.text = String.format("Rating: %s", movie.vote.toString())
 
-        ivStar.setOnClickListener { movieViewModel.onStarClick(movie) }
+        ivStar.setOnClickListener {
+            movieViewModel.onStarClick(movie)
+            Toast.makeText(context, "Movie added to favorites", Toast.LENGTH_SHORT).show()
+        }
 
         setOnBackPressedListener()
     }

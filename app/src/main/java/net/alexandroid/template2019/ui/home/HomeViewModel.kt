@@ -2,19 +2,21 @@ package net.alexandroid.template2019.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import net.alexandroid.template2019.model.Movie
 import net.alexandroid.template2019.model.Tmdb
+import net.alexandroid.template2019.repos.MovieRepository
 import net.alexandroid.template2019.ui.base.BaseViewModel
 import net.alexandroid.template2019.utils.SingleLiveEvent
 
-class HomeViewModel : BaseViewModel() {
+class HomeViewModel(private val movieRepository: MovieRepository) : BaseViewModel() {
 
     var isAnimated = false
 
-    private lateinit var openMovie: SingleLiveEvent<Tmdb.Movie>
+    private lateinit var openMovie: SingleLiveEvent<Movie>
     private lateinit var openFavorites: SingleLiveEvent<Unit>
-    private lateinit var favoriteMovies: MutableLiveData<Tmdb.Discover>
+    private lateinit var favoriteMovies: LiveData<List<Movie>>
 
-    fun getOpenMovie(): LiveData<Tmdb.Movie> {
+    fun getOpenMovie(): LiveData<Movie> {
         if (!::openMovie.isInitialized) {
             openMovie = SingleLiveEvent()
         }
@@ -28,16 +30,15 @@ class HomeViewModel : BaseViewModel() {
         return openFavorites
     }
 
-    fun getFavoriteMovies(): LiveData<Tmdb.Discover> {
+    fun getFavoriteMovies(): LiveData<List<Movie>> {
         if (!::favoriteMovies.isInitialized) {
-            favoriteMovies = MutableLiveData()
-            // TODO Get movies from DB
+            favoriteMovies = movieRepository.allMovies
         }
         return favoriteMovies
     }
 
 
-    fun onMovieSelected(movie: Tmdb.Movie) {
+    fun onMovieSelected(movie: Movie) {
         openMovie.postValue(movie)
     }
 

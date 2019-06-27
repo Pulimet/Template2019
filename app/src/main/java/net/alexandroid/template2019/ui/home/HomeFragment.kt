@@ -1,6 +1,5 @@
 package net.alexandroid.template2019.ui.home
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import net.alexandroid.template2019.R
+import net.alexandroid.template2019.model.Movie
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseFragment
 import net.alexandroid.template2019.ui.main.MainViewModel
-import net.alexandroid.template2019.ui.movie.MovieFragmentArgs
 import net.alexandroid.utils.mylog.MyLog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,15 +32,14 @@ class HomeFragment : BaseFragment() {
         setRecyclerView()
         swipeRefreshLayout.isRefreshing = true
         swipeRefreshLayout.setOnRefreshListener { mainViewModel.onUserRefreshedMain() }
-        homeViewModel.getOpenMovie().observe(viewLifecycleOwner, Observer<Tmdb.Movie> { openMovie(it) })
+        homeViewModel.getOpenMovie().observe(viewLifecycleOwner, Observer<Movie> { openMovie(it) })
 
         if (isFavorites()) {
             fab.hide()
-            swipeRefreshLayout.setBackgroundColor(Color.BLACK)
-            homeViewModel.getFavoriteMovies().observe(this, Observer<Tmdb.Discover> { updateItems(it) })
+            homeViewModel.getFavoriteMovies().observe(this, Observer<List<Movie>> { updateItems(it) })
         } else {
             fab.setOnClickListener { homeViewModel.onFabClick() }
-            mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> { updateItems(it) })
+            mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> { updateItems(it.results) })
             homeViewModel.getOpenFavorites().observe(viewLifecycleOwner, Observer<Unit> { openFavorites() })
         }
     }
@@ -56,13 +54,13 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun updateItems(it: Tmdb.Discover) {
+    private fun updateItems(list: List<Movie>) {
         MyLog.d("Discover movies loaded")
-        homeAdapter?.setItems(it)
+        homeAdapter?.setItems(list)
         swipeRefreshLayout.isRefreshing = false
     }
 
-    private fun openMovie(movie: Tmdb.Movie) {
+    private fun openMovie(movie: Movie) {
         val holder = homeRecyclerView.findViewHolderForLayoutPosition(movie.position)
         val view = holder?.itemView?.findViewById<View>(R.id.imgMovie) ?: return
         findNavController().navigate(
