@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                 .scaleY(1f)
                 .setDuration(1500)
                 .setInterpolator(DecelerateInterpolator())
-                .setStartDelay(300)
                 .start()
         }
     }
