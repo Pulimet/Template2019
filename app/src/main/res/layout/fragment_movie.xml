@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    tools:context=".ui.movie.MovieFragment">
 
     <ImageView
         android:id="@+id/imgMoviePoster"
@@ -20,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"/>
 
     <TextView
         android:id="@+id/tvTitle"
@@ -35,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="@id/imgMoviePoster"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Movie title is here (2019)" />
+        tools:text="Movie title is here (2019)"/>
 
     <TextView
         android:id="@+id/tvDescription"
@@ -47,7 +49,7 @@
         app:layout_constraintBottom_toTopOf="@id/tvRating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Movie description is here and it can be much longer. Very long string with a lot of details about the movie" />
+        tools:text="Movie description is here and it can be much longer. Very long string with a lot of details about the movie"/>
 
     <TextView
         android:id="@+id/tvRating"
@@ -57,5 +59,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Rating: 7.8" />
+        tools:text="Rating: 7.8"/>
+
+    <ImageView
+        android:id="@+id/ivStar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/desc_add_to_favorites"
+        android:src="@android:drawable/btn_star_big_on"
+        app:layout_constraintBottom_toTopOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

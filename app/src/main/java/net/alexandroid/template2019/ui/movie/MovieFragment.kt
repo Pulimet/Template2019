@@ -14,10 +14,12 @@ import net.alexandroid.template2019.loadImage
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseFragment
 import net.alexandroid.utils.mylog.MyLog
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieFragment : BaseFragment() {
     private lateinit var movie: Tmdb.Movie
     private var isGoBackCalled = false
+    private val movieViewModel: MovieViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +27,7 @@ class MovieFragment : BaseFragment() {
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movie, container, false)
     }
 
@@ -43,6 +41,8 @@ class MovieFragment : BaseFragment() {
         tvTitle.text = movie.getTitleWithYear()
         tvDescription.text = movie.overview
         tvRating.text = String.format("Rating: %s", movie.vote.toString())
+
+        ivStar.setOnClickListener { movieViewModel.onStarClick(movie) }
 
         setOnBackPressedListener()
     }

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
@@ -31,6 +32,8 @@ dependencies {
     def coroutines_version = "1.2.1"
     def koin_version = "2.0.1"
     def retrofit_version = '2.6.0'
+    def room_version = "2.1.0"
+    def archLifecycleVersion = "2.2.0-alpha01"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -62,6 +65,17 @@ dependencies {
 
     // GSON
     implementation "com.google.code.gson:gson:2.8.5"
+
+    // ROOM
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
+
 
     // Image loading
     implementation 'com.squareup.picasso:picasso:2.71828'

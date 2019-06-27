@@ -8,6 +8,7 @@ import net.alexandroid.template2019.ui.home.HomeViewModel
 import net.alexandroid.template2019.ui.main.MainRepository
 import net.alexandroid.template2019.ui.main.MainRepositoryImpl
 import net.alexandroid.template2019.ui.main.MainViewModel
+import net.alexandroid.template2019.ui.movie.MovieViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -23,6 +24,7 @@ var appModule = module {
     single<MainRepository> { MainRepositoryImpl(get()) }
     viewModel { MainViewModel(get()) }
     viewModel { HomeViewModel() }
+    viewModel { MovieViewModel() }
 }
 
 fun createOkHttpClient(): OkHttpClient {

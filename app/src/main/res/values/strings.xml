@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Template2019</string>
     <string name="desc_movie_image">Movie image</string>
+    <string name="desc_add_to_favorites">Add to favorites</string>
 </resources>

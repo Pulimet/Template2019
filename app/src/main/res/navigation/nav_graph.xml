@@ -13,14 +13,18 @@
             android:id="@+id/action_homeFragment_to_movieFragment"
             app:destination="@id/movieFragment"
             app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
+            app:popExitAnim="@anim/pop_exit_anim"/>
+        <action
+            android:id="@+id/action_homeFragment_to_homeFragment"
+            app:destination="@id/homeFragment"/>
+        <argument android:name="favorites" app:argType="boolean" android:defaultValue="false"/>
     </fragment>
     <fragment
         android:id="@+id/movieFragment"
         android:name="net.alexandroid.template2019.ui.movie.MovieFragment"
-        android:label="MovieFragment" >
+        android:label="MovieFragment">
         <argument
             android:name="movie"
-            app:argType="net.alexandroid.template2019.model.Tmdb$Movie" />
+            app:argType="net.alexandroid.template2019.model.Tmdb$Movie"/>
     </fragment>
 </navigation>

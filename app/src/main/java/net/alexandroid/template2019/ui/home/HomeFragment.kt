@@ -1,5 +1,6 @@
 package net.alexandroid.template2019.ui.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import net.alexandroid.template2019.R
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseFragment
 import net.alexandroid.template2019.ui.main.MainViewModel
+import net.alexandroid.template2019.ui.movie.MovieFragmentArgs
 import net.alexandroid.utils.mylog.MyLog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,9 +33,20 @@ class HomeFragment : BaseFragment() {
         setRecyclerView()
         swipeRefreshLayout.isRefreshing = true
         swipeRefreshLayout.setOnRefreshListener { mainViewModel.onUserRefreshedMain() }
-        mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> { updateItems(it) })
         homeViewModel.getOpenMovie().observe(viewLifecycleOwner, Observer<Tmdb.Movie> { openMovie(it) })
+
+        if (isFavorites()) {
+            fab.hide()
+            swipeRefreshLayout.setBackgroundColor(Color.BLACK)
+            homeViewModel.getFavoriteMovies().observe(this, Observer<Tmdb.Discover> { updateItems(it) })
+        } else {
+            fab.setOnClickListener { homeViewModel.onFabClick() }
+            mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> { updateItems(it) })
+            homeViewModel.getOpenFavorites().observe(viewLifecycleOwner, Observer<Unit> { openFavorites() })
+        }
     }
+
+    private fun isFavorites() = arguments != null && HomeFragmentArgs.fromBundle(arguments!!).favorites
 
     private fun setRecyclerView() {
         homeRecyclerView.apply {
@@ -55,6 +68,12 @@ class HomeFragment : BaseFragment() {
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToMovieFragment(movie),
             FragmentNavigatorExtras(view to "imageViewAnim")
+        )
+    }
+
+    private fun openFavorites() {
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToHomeFragment(true)
         )
     }
 }
