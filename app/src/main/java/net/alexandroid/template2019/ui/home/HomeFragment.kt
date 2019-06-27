@@ -43,7 +43,7 @@ class HomeFragment : BaseFragment() {
             adapter = homeAdapter
 
             // Solve return shared element transition
-            postponeEnterTransition()
+          postponeEnterTransition()
             viewTreeObserver.addOnPreDrawListener {
                 startPostponedEnterTransition()
                 true

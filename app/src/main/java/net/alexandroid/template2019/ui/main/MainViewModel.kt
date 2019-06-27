@@ -14,7 +14,7 @@ class MainViewModel(private val repo: MainRepository) : BaseViewModel() {
     private lateinit var viewListener: MutableLiveData<Int>
     private lateinit var discoverMovies: MutableLiveData<Tmdb.Discover>
 
-    private var isAnimated = false
+    private var isAppLaunchAnimated = false
 
     fun getViewEvents(): LiveData<Int> {
         if (!::viewListener.isInitialized) {
@@ -54,9 +54,9 @@ class MainViewModel(private val repo: MainRepository) : BaseViewModel() {
     }
 
     fun onWindowFocusChanged(hasFocus: Boolean) {
-        if (hasFocus && !isAnimated) {
+        if (hasFocus && !isAppLaunchAnimated) {
             viewListener.postValue(EVENT_START_ANIMATION)
-            isAnimated = true
+            isAppLaunchAnimated = true
         }
     }
 }

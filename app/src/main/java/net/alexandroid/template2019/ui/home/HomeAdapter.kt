@@ -13,7 +13,7 @@ import net.alexandroid.template2019.ui.base.BaseHolder
 class HomeAdapter(private val homeViewModel: HomeViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var data = listOf<Tmdb.Movie>()
-    private var offset = 200L
+    private var offset = 300L
 
     private var launchTime = 0L
 
@@ -32,15 +32,15 @@ class HomeAdapter(private val homeViewModel: HomeViewModel) : RecyclerView.Adapt
     }
 
     private fun addScaleAnimation(holder: RecyclerView.ViewHolder) {
-        if (System.currentTimeMillis() > launchTime + 1000 ) return
+        if (homeViewModel.isAnimated || System.currentTimeMillis() > launchTime + 1000) return
 
         val anim = ScaleAnimation(
             0.0f, 1.0f, 0.0f, 1.0f,
             RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f
         )
-        anim.duration = 800L
+        anim.duration = 1000L
         anim.startOffset = offset
-        offset += 100
+        offset += 150
         holder.itemView.startAnimation(anim)
     }
 

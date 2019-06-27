@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    def nav_version = "2.0.0"
+    def nav_version = "2.1.0-alpha05"
     def coroutines_version = "1.2.1"
     def koin_version = "2.0.1"
     def retrofit_version = '2.6.0'

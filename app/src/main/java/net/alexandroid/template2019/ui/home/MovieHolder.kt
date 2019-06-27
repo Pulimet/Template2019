@@ -10,7 +10,7 @@ import net.alexandroid.template2019.loadImage
 import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseHolder
 
-class MovieHolder(v: View, private val mainViewModel: HomeViewModel) : BaseHolder(v) {
+class MovieHolder(v: View, private val homeViewModel: HomeViewModel) : BaseHolder(v) {
 
     init {
         itemView.setOnClickListener(this)
@@ -18,10 +18,11 @@ class MovieHolder(v: View, private val mainViewModel: HomeViewModel) : BaseHolde
 
     override fun onClick(v: View?) {
         if (adapterPosition != RecyclerView.NO_POSITION && v != null) {
+            homeViewModel.isAnimated = true
             ViewCompat.setTransitionName(v.imgMovie, "imageViewAnim")
             val movie = v.tag as Tmdb.Movie
             movie.position = adapterPosition
-            mainViewModel.onMovieSelected(movie)
+            homeViewModel.onMovieSelected(movie)
         }
     }
 
