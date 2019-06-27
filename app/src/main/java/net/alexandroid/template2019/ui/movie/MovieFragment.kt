@@ -49,14 +49,17 @@ class MovieFragment : BaseFragment() {
 
     private fun setOnBackPressedListener() {
         requireActivity().onBackPressedDispatcher.addCallback {
-            imgMoviePoster.animate()
-                .translationY(0.3f)
-                .scaleX(0.3f)
-                .scaleY(0.3f)
-                .setDuration(500)
-                .setInterpolator(DecelerateInterpolator())
-                .setUpdateListener { goBack() }
-                .start()
+            imgMoviePoster?.apply {
+                animate()
+                    .translationY(0.3f)
+                    .scaleX(0.3f)
+                    .scaleY(0.3f)
+                    .setDuration(500)
+                    .setInterpolator(DecelerateInterpolator())
+                    .setUpdateListener { goBack() }
+                    .start()
+                remove() // CallBack
+            }
         }
     }
 
@@ -66,6 +69,4 @@ class MovieFragment : BaseFragment() {
             findNavController().popBackStack()
         }
     }
-
-
 }
