@@ -7,7 +7,7 @@
 
     <fragment android:id="@+id/homeFragment"
               android:name="net.alexandroid.template2019.ui.home.HomeFragment"
-              android:label="fragment_home"
+              android:label="Movies App"
               tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_movieFragment"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/movieFragment"
         android:name="net.alexandroid.template2019.ui.movie.MovieFragment"
-        android:label="MovieFragment">
+        android:label="Movie Details">
         <argument
             android:name="movie"
             app:argType="net.alexandroid.template2019.model.Movie"/>
