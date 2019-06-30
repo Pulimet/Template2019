@@ -8,8 +8,8 @@ import java.util.*
 
 class MainRepositoryImpl(private val tmdbApiService: TmdbApiService) :
     MainRepository {
-    override fun discoverMoviesAsync(): Deferred<Tmdb.Discover> =
-        tmdbApiService.discoverAsync(todayDate = getTodayDate())
+    override fun discoverMoviesAsync(page: Long): Deferred<Tmdb.Discover> =
+        tmdbApiService.discoverAsync(todayDate = getTodayDate(), page = page)
 
     private fun getTodayDate(): String = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
 }

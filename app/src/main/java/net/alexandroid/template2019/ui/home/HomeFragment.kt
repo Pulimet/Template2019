@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import net.alexandroid.template2019.R
 import net.alexandroid.template2019.model.Movie
-import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseFragment
 import net.alexandroid.template2019.ui.main.MainViewModel
 import net.alexandroid.utils.mylog.MyLog
@@ -39,7 +38,7 @@ class HomeFragment : BaseFragment() {
             homeViewModel.getFavoriteMovies().observe(this, Observer<List<Movie>> { updateItems(it) })
         } else {
             fab.setOnClickListener { homeViewModel.onFabClick() }
-            mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> { updateItems(it.results) })
+            mainViewModel.getDiscoveredMovies().observe(this, Observer<List<Movie>> { updateItems(it) })
             homeViewModel.getOpenFavorites().observe(viewLifecycleOwner, Observer<Unit> { openFavorites() })
         }
     }
@@ -61,6 +60,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun openMovie(movie: Movie) {
+        homeViewModel.isAnimated = true
+
         val holder = homeRecyclerView.findViewHolderForLayoutPosition(movie.position)
         val view = holder?.itemView?.findViewById<View>(R.id.imgMovie) ?: return
         findNavController().navigate(
@@ -70,6 +71,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun openFavorites() {
+        homeViewModel.isAnimated = true
+
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToHomeFragment(true)
         )

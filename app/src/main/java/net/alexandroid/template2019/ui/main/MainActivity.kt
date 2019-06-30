@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import net.alexandroid.template2019.R
-import net.alexandroid.template2019.model.Tmdb
+import net.alexandroid.template2019.model.Movie
 import net.alexandroid.utils.mylog.MyLog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         navController = findNavController(R.id.nav_host_fragment)
 
-        mainViewModel.getDiscoveredMovies().observe(this, Observer<Tmdb.Discover> {
+        mainViewModel.getDiscoveredMovies().observe(this, Observer<List<Movie>> {
             MyLog.d("Discover movies loaded")
         })
 

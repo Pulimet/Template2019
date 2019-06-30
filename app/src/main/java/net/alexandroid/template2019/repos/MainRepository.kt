@@ -4,5 +4,5 @@ import kotlinx.coroutines.Deferred
 import net.alexandroid.template2019.model.Tmdb
 
 interface MainRepository {
-    fun discoverMoviesAsync(): Deferred<Tmdb.Discover>
+    fun discoverMoviesAsync(page: Long = 1): Deferred<Tmdb.Discover>
 }

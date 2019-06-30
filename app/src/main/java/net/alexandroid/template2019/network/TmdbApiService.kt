@@ -10,6 +10,7 @@ interface TmdbApiService {
     @GET("3/discover/movie")
     fun discoverAsync(
         @Query("api_key") apiKey: String = TMDB_API_KEY,
+        @Query("page") page: Long = 1,
         @Query("sort_by") sortBy: String = "release_date.desc",
         @Query("release_date.lte") todayDate: String = "2019-06-25"
     ): Deferred<Tmdb.Discover>
