@@ -18,6 +18,8 @@ import net.alexandroid.utils.mylog.MyLog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
+
+
 class MainActivity : AppCompatActivity() {
 
     private val job = Job()
@@ -25,13 +27,12 @@ class MainActivity : AppCompatActivity() {
     private val bgScope = CoroutineScope(Dispatchers.IO + job)
 
     private val mainViewModel: MainViewModel by viewModel()
-    private var navController: NavController? = null
+    private lateinit var  navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setToolBar()
 
         mainViewModel.getDiscoveredMovies().observe(this, Observer<List<Movie>> {
@@ -48,7 +49,19 @@ class MainActivity : AppCompatActivity() {
     private fun setToolBar() {
         setSupportActionBar(toolBar)
         navController = findNavController(R.id.nav_host_fragment)
-        NavigationUI.setupWithNavController(toolBar, navController!!)
+        NavigationUI.setupWithNavController(toolBar, navController)
+
+        navController.addOnDestinationChangedListener { _, destination, arguments ->
+            if (destination.id == R.id.homeFragment && arguments?.getBoolean("favorites") == true) {
+                toolBar.title = getString(R.string.favorites)
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            }
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        navController.popBackStack()
+        return true
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
