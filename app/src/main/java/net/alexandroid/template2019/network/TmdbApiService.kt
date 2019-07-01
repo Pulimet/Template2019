@@ -12,6 +12,7 @@ interface TmdbApiService {
         @Query("api_key") apiKey: String = TMDB_API_KEY,
         @Query("page") page: Long = 1,
         @Query("sort_by") sortBy: String = "release_date.desc",
-        @Query("release_date.lte") todayDate: String = "2019-06-25"
+        @Query("release_date.lte") todayDate: String = "2019-06-25",
+        @Query("vote_count.gte") minNumOfVotes : Int = 2
     ): Deferred<Tmdb.Discover>
 }
