@@ -11,16 +11,13 @@ import net.alexandroid.utils.mylog.MyLog
 import org.koin.core.KoinComponent
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel : ViewModel(), CoroutineScope, KoinComponent {
+abstract class BaseViewModel : ViewModel(), KoinComponent {
 
     init {
         if (SHOW_VIEW_MODEL_LOGS) MyLog.w("${javaClass.simpleName} - init")
     }
-    override val coroutineContext: CoroutineContext = Dispatchers.IO
-
     override fun onCleared() {
         if (SHOW_VIEW_MODEL_LOGS)  MyLog.w("${javaClass.simpleName} - onCleared")
-        coroutineContext.cancel()
     }
 }
 

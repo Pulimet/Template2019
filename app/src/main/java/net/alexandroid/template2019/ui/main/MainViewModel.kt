@@ -2,6 +2,8 @@ package net.alexandroid.template2019.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.alexandroid.template2019.model.Movie
 import net.alexandroid.template2019.model.Tmdb
@@ -36,7 +38,7 @@ class MainViewModel(private val repo: MainRepository) : BaseViewModel() {
     }
 
     private fun fetchDiscoveredMovies() {
-        launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val result = retryIO(desc = "Discover Movies") { repo.discoverMoviesAsync(1).await() }
             if (result != null) {
                 removeMoviesWithoutImages(result)
