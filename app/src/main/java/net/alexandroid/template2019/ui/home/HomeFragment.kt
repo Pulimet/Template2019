@@ -31,15 +31,15 @@ class HomeFragment : BaseFragment() {
         setRecyclerView()
         swipeRefreshLayout.isRefreshing = true
         swipeRefreshLayout.setOnRefreshListener { mainViewModel.onUserRefreshedMain() }
-        homeViewModel.getOpenMovie().observe(viewLifecycleOwner, Observer<Movie> { openMovie(it) })
+        homeViewModel.getOpenMovie().observe(viewLifecycleOwner, Observer { openMovie(it) })
 
         if (isFavorites()) {
             fab.hide()
-            homeViewModel.getFavoriteMovies().observe(this, Observer<List<Movie>> { updateItems(it) })
+            homeViewModel.getFavoriteMovies().observe(viewLifecycleOwner, Observer { updateItems(it) })
         } else {
             fab.setOnClickListener { homeViewModel.onFabClick() }
-            mainViewModel.getDiscoveredMovies().observe(this, Observer<List<Movie>> { updateItems(it) })
-            homeViewModel.getOpenFavorites().observe(viewLifecycleOwner, Observer<Unit> { openFavorites() })
+            mainViewModel.getDiscoveredMovies().observe(viewLifecycleOwner, Observer { updateItems(it) })
+            homeViewModel.getOpenFavorites().observe(viewLifecycleOwner, Observer { openFavorites() })
         }
     }
 
