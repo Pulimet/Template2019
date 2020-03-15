@@ -7,7 +7,8 @@ import kotlinx.coroutines.launch
 import net.alexandroid.shpref.ShPref
 import net.alexandroid.template2019.di.KoinLogs
 import net.alexandroid.template2019.di.appModule
-import net.alexandroid.utils.mylog.MyLog
+import net.alexandroid.utils.mylogkt.MyLogKt
+import net.alexandroid.utils.mylogkt.logE
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import kotlin.coroutines.CoroutineContext
@@ -18,8 +19,10 @@ class App : Application(), CoroutineScope {
 
     override fun onCreate() {
         super.onCreate()
-        MyLog.init(applicationContext, "Template2019", BuildConfig.DEBUG)
-        MyLog.e("=== Application onCreate()")
+        MyLogKt.tag = "Template2019"
+        MyLogKt.packageName = packageName
+
+        logE("=== Application onCreate()")
         ShPref.init(applicationContext, ShPref.APPLY)
 
         launch { initKoin() }

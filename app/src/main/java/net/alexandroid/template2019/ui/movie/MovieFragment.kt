@@ -14,7 +14,8 @@ import net.alexandroid.template2019.R
 import net.alexandroid.template2019.loadImage
 import net.alexandroid.template2019.model.Movie
 import net.alexandroid.template2019.ui.base.BaseFragment
-import net.alexandroid.utils.mylog.MyLog
+import net.alexandroid.utils.mylogkt.logD
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieFragment : BaseFragment() {
@@ -36,7 +37,7 @@ class MovieFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let { movie = MovieFragmentArgs.fromBundle(it).movie }
-        MyLog.d("Movie title is: ${movie.title}")
+        logD("Movie title is: ${movie.title}")
 
         imgMoviePoster.loadImage(movie.getImageUrl(), holder = R.drawable.ic_no_video)
         tvTitle.text = movie.getTitleWithYear()

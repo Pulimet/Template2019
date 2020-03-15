@@ -8,7 +8,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import net.alexandroid.template2019.SHOW_FRAGMENTS_LOGS
-import net.alexandroid.utils.mylog.MyLog
+import net.alexandroid.utils.mylogkt.logI
+
 
 abstract class BaseFragment : Fragment() {
     private val job = Job()
@@ -18,22 +19,22 @@ abstract class BaseFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(SHOW_FRAGMENTS_LOGS) MyLog.i(object {}.javaClass.enclosingMethod?.name + ": " + javaClass.simpleName)
+        if(SHOW_FRAGMENTS_LOGS) logI(object {}.javaClass.enclosingMethod?.name + ": " + javaClass.simpleName)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(SHOW_FRAGMENTS_LOGS) MyLog.i(object {}.javaClass.enclosingMethod?.name + ": " + javaClass.simpleName)
+        if(SHOW_FRAGMENTS_LOGS) logI(object {}.javaClass.enclosingMethod?.name + ": " + javaClass.simpleName)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         job.cancel()
-        if(SHOW_FRAGMENTS_LOGS) MyLog.i(object {}.javaClass.enclosingMethod?.name + ": " + javaClass.simpleName)
+        if(SHOW_FRAGMENTS_LOGS) logI(object {}.javaClass.enclosingMethod?.name + ": " + javaClass.simpleName)
     }
 
     override fun onDetach() {
         super.onDetach()
-        if(SHOW_FRAGMENTS_LOGS) MyLog.i(object {}.javaClass.enclosingMethod?.name + ": " + javaClass.simpleName)
+        if(SHOW_FRAGMENTS_LOGS) logI(object {}.javaClass.enclosingMethod?.name + ": " + javaClass.simpleName)
     }
 }

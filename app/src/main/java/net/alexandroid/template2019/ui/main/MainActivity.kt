@@ -14,11 +14,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import net.alexandroid.template2019.R
 import net.alexandroid.template2019.model.Movie
-import net.alexandroid.utils.mylog.MyLog
+import net.alexandroid.utils.mylogkt.logD
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
-
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setToolBar()
 
         mainViewModel.getDiscoveredMovies().observe(this, Observer<List<Movie>> {
-            MyLog.d("Discover movies loaded")
+            logD("Discover movies loaded")
         })
 
         mainViewModel.getViewEvents().observe(this, Observer {

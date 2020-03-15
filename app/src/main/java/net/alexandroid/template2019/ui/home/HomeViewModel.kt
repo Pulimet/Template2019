@@ -1,9 +1,7 @@
 package net.alexandroid.template2019.ui.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import net.alexandroid.template2019.model.Movie
-import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.repos.MovieRepository
 import net.alexandroid.template2019.ui.base.BaseViewModel
 import net.alexandroid.template2019.utils.SingleLiveEvent

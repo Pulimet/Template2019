@@ -1,7 +1,8 @@
 package net.alexandroid.template2019.network
 
 import kotlinx.coroutines.delay
-import net.alexandroid.utils.mylog.MyLog
+
+import net.alexandroid.utils.mylogkt.logE
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -18,9 +19,15 @@ suspend fun <T> retryIO(
         try {
             return block()
         } catch (e: IOException) {
-            MyLog.e("Description (IOException): $desc, fail counter: ${it + 1}, Exception: ${e.message} ")
+            logE(
+                "Description (IOException): $desc, fail counter: ${it + 1}, Exception: ${e.message} ",
+                t = e
+            )
         } catch (e: HttpException) {
-            MyLog.e("Description (HttpException): $desc, fail counter: ${it + 1}, Exception: ${e.message} ")
+            logE(
+                "Description (HttpException): $desc, fail counter: ${it + 1}, Exception: ${e.message} ",
+                t = e
+            )
         }
         delay(currentDelay)
         currentDelay = (currentDelay * factor).toLong().coerceAtMost(maxDelay)

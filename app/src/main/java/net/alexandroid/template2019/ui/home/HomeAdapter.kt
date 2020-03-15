@@ -7,7 +7,6 @@ import android.view.animation.ScaleAnimation
 import androidx.recyclerview.widget.RecyclerView
 import net.alexandroid.template2019.R
 import net.alexandroid.template2019.model.Movie
-import net.alexandroid.template2019.model.Tmdb
 import net.alexandroid.template2019.ui.base.BaseHolder
 
 

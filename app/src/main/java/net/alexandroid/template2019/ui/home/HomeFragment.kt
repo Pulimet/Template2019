@@ -13,7 +13,8 @@ import net.alexandroid.template2019.R
 import net.alexandroid.template2019.model.Movie
 import net.alexandroid.template2019.ui.base.BaseFragment
 import net.alexandroid.template2019.ui.main.MainViewModel
-import net.alexandroid.utils.mylog.MyLog
+import net.alexandroid.utils.mylogkt.logD
+
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,7 +55,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun updateItems(list: List<Movie>) {
-        MyLog.d("Discover movies loaded")
+        logD("Discover movies loaded")
         homeAdapter?.setItems(list)
         swipeRefreshLayout.isRefreshing = false
     }
