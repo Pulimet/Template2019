@@ -23,13 +23,9 @@ class MovieFragment : BaseFragment() {
     private var isGoBackCalled = false
     private val movieViewModel: MovieViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_movie, container, false)
     }
 
@@ -49,23 +45,6 @@ class MovieFragment : BaseFragment() {
             Toast.makeText(context, "Movie added to favorites", Toast.LENGTH_SHORT).show()
         }
 
-        setOnBackPressedListener()
-    }
-
-    private fun setOnBackPressedListener() {
-        requireActivity().onBackPressedDispatcher.addCallback {
-            imgMoviePoster?.apply {
-                animate()
-                    .translationY(0.3f)
-                    .scaleX(0.3f)
-                    .scaleY(0.3f)
-                    .setDuration(500)
-                    .setInterpolator(DecelerateInterpolator())
-                    .setUpdateListener { goBack() }
-                    .start()
-                remove() // CallBack
-            }
-        }
     }
 
     private fun goBack() {
