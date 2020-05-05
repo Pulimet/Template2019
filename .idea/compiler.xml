@@ -13,6 +13,7 @@
     </wildcardResourcePatterns>
     <bytecodeTargetLevel>
       <module name="app" target="1.7" />
+      <module name="Template2019.app" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
