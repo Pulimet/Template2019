@@ -11,9 +11,8 @@
       <entry name="!?*.kt" />
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11">
       <module name="app" target="1.7" />
-      <module name="Template2019.app" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
